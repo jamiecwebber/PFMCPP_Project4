@@ -94,5 +94,19 @@ int main()
     auto result = ft.add(3.2f, 23.f );
     std::cout << "result of ft.add(): " << result << std::endl;
 
+    DoubleType dt;
+    double result2 = dt.multiply(1.4, 2.65);
+    std::cout << "result of dt.multiply(): " << result2 << std::endl;
+
+    IntType it;
+    int result3 = it.divide(5, 0);
+    std::cout << "result of divide by zero: " << result3 << std::endl;
+
+    int result4 = it.subtract(5, 2);
+    std::cout << "result of it.subtract(): " << result4 << std::endl;
+
+    float result5 = ft.divide(3.5f, 0.0f);
+    std::cout << "result of float divide by zero: " << result5 << std::endl;
+
     std::cout << "good to go!" << std::endl;
 }
