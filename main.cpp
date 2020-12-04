@@ -14,6 +14,22 @@ New/This/Pointers/References conclusion
          on the heap without leaking, without using smart pointers. 
  */
 
+struct A {} ;
+
+
+struct HeapA 
+{
+    HeapA() : a(new A()) {}
+    ~HeapA()
+    {
+        if (a != nullptr)
+        {
+            delete a;
+        }
+    }
+
+    A* a;
+};
 
 
 
@@ -262,3 +278,5 @@ int main()
 
     std::cout << "good to go!" << std::endl;
 }
+
+
