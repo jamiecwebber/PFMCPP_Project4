@@ -22,10 +22,7 @@ struct HeapA
     HeapA() : a(new A()) {}
     ~HeapA()
     {
-        if (a != nullptr)
-        {
-            delete a;
-        }
+        delete a;
     }
 
     A* a;
