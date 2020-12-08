@@ -141,7 +141,7 @@ struct FloatType
 
     FloatType& add( float input )
     {
-        if (value != nullptr) { *value += input; }
+        *value += input;
         return *this;
     }
 
@@ -151,7 +151,7 @@ struct FloatType
 
     FloatType& subtract( float input )
     {
-        if (value != nullptr) { *value -= input; }
+        *value -= input;
         return *this;
     }
 
@@ -161,7 +161,7 @@ struct FloatType
 
     FloatType& multiply( float input )
     {
-        if (value != nullptr) { *value *= input; }
+        *value *= input;
         return *this;
     }
 
@@ -171,14 +171,12 @@ struct FloatType
 
     FloatType& divide( float input )
     {
-        if (value != nullptr) 
-        { 
-            if (input == 0.f)
-            {
-                std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
-            }
-            *value /= input;
+        if (input == 0.f)
+        {
+            std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
         }
+        *value /= input;
+
         return *this;
     }
 
@@ -200,7 +198,7 @@ struct DoubleType
     double subtract( double lhs, double rhs ) { return lhs - rhs ; }
     double multiply( double lhs, double rhs ) { return lhs * rhs ; }
     double divide( double lhs, double rhs ) 
-    { 
+    {
         if (rhs == 0.)
         {
             std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
@@ -210,32 +208,29 @@ struct DoubleType
 
     DoubleType& add ( double input )
     {
-        if (value != nullptr) { *value += input; }
+        *value += input; 
         return *this;
     }
 
     DoubleType& subtract ( double input )
     {
-        if (value != nullptr) { *value -= input; }
+        *value -= input;
         return *this;
     }
 
     DoubleType& multiply ( double input )
     {
-        if (value != nullptr) { *value *= input; }
+        *value *= input; 
         return *this;
     }
 
     DoubleType& divide ( double input )
     {
-        if (value != nullptr) 
-        { 
-            if (input == 0.)
-            {
-                std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
-            }
-            *value /= input; 
+        if (input == 0.)
+        {
+            std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
         }
+        *value /= input; 
         return *this;
     }
 
@@ -279,34 +274,32 @@ struct IntType
 
     IntType& add (int input)
     {
-        if (value != nullptr) *value += input;
+        *value += input;
         return *this;
     }
 
     IntType& subtract (int input)
     {
-        if (value != nullptr) *value -= input;
+        *value -= input;
         return *this;
     }
 
     IntType& multiply (int input)
     {
-        if (value != nullptr) *value *= input;
+        *value *= input;
         return *this;
     }
 
     IntType& divide (int input)
     {
-        if (value != nullptr) 
+
+        if (input == 0 )
         {
-            if (input == 0 )
-            {
-                std::cout << "error, integer division by zero will crash the program!" << std::endl;
-            }
-            else
-            {
-                *value /= input;
-            }
+            std::cout << "error, integer division by zero will crash the program!" << std::endl;
+        }
+        else
+        {
+            *value /= input;
         }
         return *this;
     }
