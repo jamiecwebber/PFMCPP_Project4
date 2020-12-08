@@ -329,7 +329,7 @@ struct IntType
 };
 
 
-FloatType& FloatType::add( const FloatType& input ) { return this->add(*input.value); }FloatType& FloatType::add( const DoubleType& input ) { return add(*input.value);}
+FloatType& FloatType::add( const FloatType& input ) { return add(*input.value); }FloatType& FloatType::add( const DoubleType& input ) { return add(*input.value);}
 FloatType& FloatType::add( const IntType& input ) { return add(*input.value);}
 
 FloatType& FloatType::subtract( const FloatType& input ) { return subtract(*input.value); }
@@ -344,7 +344,8 @@ FloatType& FloatType::divide( const FloatType& input ) { return divide(*input.va
 FloatType& FloatType::divide( const DoubleType& input ) { return divide(*input.value); }
 FloatType& FloatType::divide( const IntType& input ) { return divide(*input.value); }
 
-DoubleType& DoubleType::add( const FloatType& input ) { return this->add(*input.value); }DoubleType& DoubleType::add( const DoubleType& input ) { return add(*input.value);}
+DoubleType& DoubleType::add( const FloatType& input ) { return add(*input.value); }
+DoubleType& DoubleType::add( const DoubleType& input ) { return add(*input.value);}
 DoubleType& DoubleType::add( const IntType& input ) { return add(*input.value);}
 
 DoubleType& DoubleType::subtract( const FloatType& input ) { return subtract(*input.value); }
