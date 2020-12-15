@@ -173,7 +173,7 @@ struct FloatType
     {
         if (input == 0.f)
         {
-            std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
+            std::cout << "warning: floating point division by zero!" << std::endl;
         }
         *value /= input;
 
@@ -192,18 +192,6 @@ struct DoubleType
     ~DoubleType( )
     {
         delete value;
-    }
-
-    double add( double lhs, double rhs ) { return lhs + rhs ; }
-    double subtract( double lhs, double rhs ) { return lhs - rhs ; }
-    double multiply( double lhs, double rhs ) { return lhs * rhs ; }
-    double divide( double lhs, double rhs ) 
-    {
-        if (rhs == 0.)
-        {
-            std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
-        }
-        return lhs / rhs ; 
     }
 
     DoubleType& add ( double input )
@@ -228,7 +216,7 @@ struct DoubleType
     {
         if (input == 0.)
         {
-            std::cout << "warning, floating point division by zero returns 'inf' !" << std::endl;
+            std::cout << "warning: floating point division by zero!" << std::endl;
         }
         *value /= input; 
         return *this;
@@ -258,20 +246,6 @@ struct IntType
     IntType(int val) : value(new int(val)) {}
     ~IntType() { delete value; }
 
-    int add( int lhs, int rhs ) { return lhs + rhs ; }
-    int subtract( int lhs, int rhs ) { return lhs - rhs ; }
-    int multiply( int lhs, int rhs ) { return lhs * rhs ; }
-    int divide( int lhs, int rhs )
-    { 
-        if (rhs == 0)
-        {
-            std::cout << "error, integer division by zero will crash the program!" << std::endl;
-            std::cout << "returning lhs" << std::endl;
-            return lhs;
-        }
-        return lhs / rhs ; 
-    }
-
     IntType& add (int input)
     {
         *value += input;
@@ -295,7 +269,7 @@ struct IntType
 
         if (input == 0 )
         {
-            std::cout << "error, integer division by zero will crash the program!" << std::endl;
+            std::cout << "error: integer division by zero is an error and will crash the program!" << std::endl;
         }
         else
         {
