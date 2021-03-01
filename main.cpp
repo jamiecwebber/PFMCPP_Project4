@@ -115,217 +115,145 @@ struct IntType;
 
 struct FloatType 
 {
-    float* value = nullptr;
     FloatType(float val) : value(new float(val)) { }
     ~FloatType()
     {
         delete value;
     }
+    operator float() { return *value; }
 
-    FloatType& add( float input )
-    {
-        *value += input;
-        return *this;
-    }
+    FloatType& add( float input );
+    FloatType& subtract( float input );
+    FloatType& multiply( float input );
+    FloatType& divide( float input );
 
-    FloatType& add( const FloatType& input ); 
-    FloatType& add( const DoubleType& input ); 
-    FloatType& add( const IntType& input ); 
-
-    FloatType& subtract( float input )
-    {
-        *value -= input;
-        return *this;
-    }
-
-    FloatType& subtract( const FloatType& input ); 
-    FloatType& subtract( const DoubleType& input );
-    FloatType& subtract( const IntType& input );
-
-    FloatType& multiply( float input )
-    {
-        *value *= input;
-        return *this;
-    }
-
-    FloatType& multiply( const FloatType& input ); 
-    FloatType& multiply( const DoubleType& input );
-    FloatType& multiply( const IntType& input );
-
-    FloatType& divide( float input )
-    {
-        if (input == 0.f)
-        {
-            std::cout << "warning: floating point division by zero!" << std::endl;
-        }
-        *value /= input;
-
-        return *this;
-    }
-
-    FloatType& divide( const FloatType& input ); 
-    FloatType& divide( const DoubleType& input );
-    FloatType& divide( const IntType& input );
+private:
+    float* value = nullptr;
 };
+
+FloatType& FloatType::add( float input )
+{
+    if (value != nullptr) *value += input;
+    return *this;
+}
+
+
+FloatType& FloatType::subtract( float input )
+{
+    if (value != nullptr) *value -= input;
+    return *this;
+}
+
+FloatType& FloatType::multiply( float input )
+{
+    if (value != nullptr) *value *= input;
+    return *this;
+}
+
+FloatType& FloatType::divide( float input )
+{
+    if (input == 0.f)
+    {
+        std::cout << "warning: floating point division by zero!" << std::endl;
+    }
+    if (value != nullptr) *value /= input;
+
+    return *this;
+}
 
 struct DoubleType
 {
-    double* value = nullptr;
     DoubleType(double val) : value(new double(val)) {}
     ~DoubleType( )
     {
         delete value;
     }
+    operator double() { return *value; }
 
-    DoubleType& add ( double input )
-    {
-        *value += input; 
-        return *this;
-    }
+    DoubleType& add ( double input );
+    DoubleType& subtract ( double input );
+    DoubleType& multiply ( double input );
+    DoubleType& divide ( double input );
 
-    DoubleType& subtract ( double input )
-    {
-        *value -= input;
-        return *this;
-    }
-
-    DoubleType& multiply ( double input )
-    {
-        *value *= input; 
-        return *this;
-    }
-
-    DoubleType& divide ( double input )
-    {
-        if (input == 0.)
-        {
-            std::cout << "warning: floating point division by zero!" << std::endl;
-        }
-        *value /= input; 
-        return *this;
-    }
-
-    DoubleType& add( const FloatType& input ); 
-    DoubleType& add( const DoubleType& input );
-    DoubleType& add( const IntType& input );
-
-    DoubleType& subtract( const FloatType& input ); 
-    DoubleType& subtract( const DoubleType& input );
-    DoubleType& subtract( const IntType& input );
-
-    DoubleType& multiply( const FloatType& input ); 
-    DoubleType& multiply( const DoubleType& input );
-    DoubleType& multiply( const IntType& input );
-    
-    DoubleType& divide( const FloatType& input ); 
-    DoubleType& divide( const DoubleType& input );
-    DoubleType& divide( const IntType& input );
+private:
+    double* value = nullptr;
 };
+
+DoubleType& DoubleType::add ( double input )
+{
+    if (value != nullptr) *value += input; 
+    return *this;
+}
+
+DoubleType& DoubleType::subtract ( double input )
+{
+    if (value != nullptr) *value -= input;
+    return *this;
+}
+
+DoubleType& DoubleType::multiply ( double input )
+{
+    if (value != nullptr) *value *= input; 
+    return *this;
+}
+
+DoubleType& DoubleType::divide ( double input )
+{
+    if (input == 0.)
+    {
+        std::cout << "warning: floating point division by zero!" << std::endl;
+    }
+    if (value != nullptr) *value /= input; 
+    return *this;
+}
 
 struct IntType
 {
-    int* value;
 
     IntType(int val) : value(new int(val)) {}
     ~IntType() { delete value; }
-
-    IntType& add (int input)
-    {
-        *value += input;
-        return *this;
-    }
-
-    IntType& subtract (int input)
-    {
-        *value -= input;
-        return *this;
-    }
-
-    IntType& multiply (int input)
-    {
-        *value *= input;
-        return *this;
-    }
-
-    IntType& divide (int input)
-    {
-
-        if (input == 0 )
-        {
-            std::cout << "error: integer division by zero is an error and will crash the program!" << std::endl;
-        }
-        else
-        {
-            *value /= input;
-        }
-        return *this;
-    }
-
-    IntType& add( const FloatType& input ); 
-    IntType& add( const DoubleType& input );
-    IntType& add( const IntType& input );
-
-    IntType& subtract( const FloatType& input ); 
-    IntType& subtract( const DoubleType& input );
-    IntType& subtract( const IntType& input );
-
-    IntType& multiply( const FloatType& input ); 
-    IntType& multiply( const DoubleType& input );
-    IntType& multiply( const IntType& input );
+    operator int() { return *value ;}
     
-    IntType& divide( const FloatType& input ); 
-    IntType& divide( const DoubleType& input );
-    IntType& divide( const IntType& input );
+    IntType& add (int input);
+    IntType& subtract (int input);
+    IntType& multiply (int input);
+    IntType& divide (int input);
+
+private:
+    int* value;
 };
 
+IntType& IntType::add (int input)
+{
+    if (value != nullptr) *value += input;
+    return *this;
+}
 
-FloatType& FloatType::add( const FloatType& input ) { return add(*input.value); }FloatType& FloatType::add( const DoubleType& input ) { return add(*input.value);}
-FloatType& FloatType::add( const IntType& input ) { return add(*input.value);}
+IntType& IntType::subtract (int input)
+{
+    if (value != nullptr) *value -= input;
+    return *this;
+}
 
-FloatType& FloatType::subtract( const FloatType& input ) { return subtract(*input.value); }
-FloatType& FloatType::subtract( const DoubleType& input ) { return subtract(*input.value); }
-FloatType& FloatType::subtract( const IntType& input ) { return subtract(*input.value); }
+IntType& IntType::multiply (int input)
+{
+    if (value != nullptr) *value *= input;
+    return *this;
+}
 
-FloatType& FloatType::multiply( const FloatType& input ) { return multiply(*input.value); }
-FloatType& FloatType::multiply( const DoubleType& input ) { return multiply(*input.value); }
-FloatType& FloatType::multiply( const IntType& input ) { return multiply(*input.value); }
+IntType& IntType::divide (int input)
+{
 
-FloatType& FloatType::divide( const FloatType& input ) { return divide(*input.value); }
-FloatType& FloatType::divide( const DoubleType& input ) { return divide(*input.value); }
-FloatType& FloatType::divide( const IntType& input ) { return divide(*input.value); }
-
-DoubleType& DoubleType::add( const FloatType& input ) { return add(*input.value); }
-DoubleType& DoubleType::add( const DoubleType& input ) { return add(*input.value);}
-DoubleType& DoubleType::add( const IntType& input ) { return add(*input.value);}
-
-DoubleType& DoubleType::subtract( const FloatType& input ) { return subtract(*input.value); }
-DoubleType& DoubleType::subtract( const DoubleType& input ) { return subtract(*input.value); }
-DoubleType& DoubleType::subtract( const IntType& input ) { return subtract(*input.value); }
-
-DoubleType& DoubleType::multiply( const FloatType& input ) { return multiply(*input.value); }
-DoubleType& DoubleType::multiply( const DoubleType& input ) { return multiply(*input.value); }
-DoubleType& DoubleType::multiply( const IntType& input ) { return multiply(*input.value); }
-
-DoubleType& DoubleType::divide( const FloatType& input ) { return divide(*input.value); }
-DoubleType& DoubleType::divide( const DoubleType& input ) { return divide(*input.value); }
-DoubleType& DoubleType::divide( const IntType& input ) { return divide(*input.value); }
-
-IntType& IntType::add( const FloatType& input ) { return this->add(*input.value); }
-IntType& IntType::add( const DoubleType& input ) { return add(*input.value);}
-IntType& IntType::add( const IntType& input ) { return add(*input.value);}
-
-IntType& IntType::subtract( const FloatType& input ) { return subtract(*input.value); }
-IntType& IntType::subtract( const DoubleType& input ) { return subtract(*input.value); }
-IntType& IntType::subtract( const IntType& input ) { return subtract(*input.value); }
-
-IntType& IntType::multiply( const FloatType& input ) { return multiply(*input.value); }
-IntType& IntType::multiply( const DoubleType& input ) { return multiply(*input.value); }
-IntType& IntType::multiply( const IntType& input ) { return multiply(*input.value); }
-
-IntType& IntType::divide( const FloatType& input ) { return divide(*input.value); }
-IntType& IntType::divide( const DoubleType& input ) { return divide(*input.value); }
-IntType& IntType::divide( const IntType& input ) { return divide(*input.value); }
-
+    if (input == 0 )
+    {
+        std::cout << "error: integer division by zero is an error and will crash the program!" << std::endl;
+    }
+    else
+    {
+        if (value != nullptr) *value /= input;
+    }
+    return *this;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
