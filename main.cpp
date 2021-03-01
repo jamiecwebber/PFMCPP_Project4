@@ -133,20 +133,23 @@ private:
 
 FloatType& FloatType::add( float input )
 {
-    if (value != nullptr) *value += input;
+    if (value != nullptr) 
+        *value += input;
     return *this;
 }
 
 
 FloatType& FloatType::subtract( float input )
 {
-    if (value != nullptr) *value -= input;
+    if (value != nullptr) 
+        *value -= input;
     return *this;
 }
 
 FloatType& FloatType::multiply( float input )
 {
-    if (value != nullptr) *value *= input;
+    if (value != nullptr) 
+        *value *= input;
     return *this;
 }
 
@@ -156,7 +159,8 @@ FloatType& FloatType::divide( float input )
     {
         std::cout << "warning: floating point division by zero!" << std::endl;
     }
-    if (value != nullptr) *value /= input;
+    if (value != nullptr) 
+        *value /= input;
 
     return *this;
 }
@@ -181,29 +185,33 @@ private:
 
 DoubleType& DoubleType::add ( double input )
 {
-    if (value != nullptr) *value += input; 
+    if (value != nullptr) 
+        *value += input; 
     return *this;
 }
 
 DoubleType& DoubleType::subtract ( double input )
 {
-    if (value != nullptr) *value -= input;
+    if (value != nullptr) 
+        *value -= input;
     return *this;
 }
 
 DoubleType& DoubleType::multiply ( double input )
 {
-    if (value != nullptr) *value *= input; 
+    if (value != nullptr) 
+        *value *= input; 
     return *this;
 }
 
 DoubleType& DoubleType::divide ( double input )
 {
-    if (input == 0.)
+    if (input == 0.0)
     {
         std::cout << "warning: floating point division by zero!" << std::endl;
     }
-    if (value != nullptr) *value /= input; 
+    if (value != nullptr) 
+        *value /= input; 
     return *this;
 }
 
@@ -225,19 +233,22 @@ private:
 
 IntType& IntType::add (int input)
 {
-    if (value != nullptr) *value += input;
+    if (value != nullptr) 
+        *value += input;
     return *this;
 }
 
 IntType& IntType::subtract (int input)
 {
-    if (value != nullptr) *value -= input;
+    if (value != nullptr) 
+        *value -= input;
     return *this;
 }
 
 IntType& IntType::multiply (int input)
 {
-    if (value != nullptr) *value *= input;
+    if (value != nullptr) 
+        *value *= input;
     return *this;
 }
 
@@ -250,7 +261,8 @@ IntType& IntType::divide (int input)
     }
     else
     {
-        if (value != nullptr) *value /= input;
+        if (value != nullptr) 
+            *value /= input;
     }
     return *this;
 }
