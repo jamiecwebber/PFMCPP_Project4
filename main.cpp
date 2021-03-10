@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cmath>
+
 /*
 Project 4: Part 4 / 9
  Chapter 4 Part 7
@@ -47,14 +50,38 @@ Project 4: Part 4 / 9
  */
 
 
-
 struct Point
 {
+    
+    Point (float f1, float f2) : x{f1}, y{f2}
+    {
+
+    }
+    
     Point& multiply(float m)
     {
         x *= m;
         y *= m;
         return *this;
+    }
+
+    Point& multiply(double m)
+    {
+        x *= static_cast<float>(m);
+        y *= static_cast<float>(m);
+        return *this;
+    }
+
+    Point& multiply(int m)
+    {
+        x *= static_cast<float>(m);
+        y *= static_cast<float>(m);
+        return *this;
+    }
+
+    void toString()
+    {
+        std::cout << "Point { x: " << x << ", y: " << y << " }" << std::endl;
     }
 private:
     float x{0}, y{0};
@@ -177,8 +204,6 @@ struct HeapA
 
 
  
-#include <iostream>
-#include <cmath>
 
 struct DoubleType;
 struct IntType;
@@ -309,7 +334,7 @@ FloatType& FloatType::pow( IntType& input )
 FloatType& FloatType::powInternal( float input )
 {
     if (value != nullptr) 
-        *value *= std::pow( *value, input );
+        *value = std::pow( *value, input );
     
     return *this;
 }
@@ -371,7 +396,7 @@ DoubleType& DoubleType::pow ( IntType& input )
 DoubleType& DoubleType::powInternal ( double input )
 {
     if (value != nullptr) 
-        *value *= std::pow( *value, input );
+        *value = std::pow( *value, input );
     
     return *this;
 }
@@ -438,7 +463,7 @@ IntType& IntType::pow ( DoubleType& input )
 IntType& IntType::powInternal ( int input )
 {
     if (value != nullptr) 
-        *value *= std::pow( *value, input );
+        *value = static_cast<int>(std::pow(*value, input));
     
     return *this;
 }
