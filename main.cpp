@@ -67,16 +67,12 @@ struct Point
 
     Point& multiply(double m)
     {
-        x *= static_cast<float>(m);
-        y *= static_cast<float>(m);
-        return *this;
+        return multiply(static_cast<float>(m));
     }
 
     Point& multiply(int m)
     {
-        x *= static_cast<float>(m);
-        y *= static_cast<float>(m);
-        return *this;
+        return multiply(static_cast<float>(m));
     }
 
     void toString()
