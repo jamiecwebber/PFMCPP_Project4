@@ -1,2 +1,2 @@
 language = "cpp"
-run = "START_TIME=$(date); clang++ -std=c++17 -Weverything -Wno-c++98-compat -Wno-missing-prototypes main.cpp && (echo $START_TIME '\n' $(date) > compile_times.txt ; ./a.out)"
+run = "clang++ -std=c++17 -Weverything -Wno-c++98-compat -Wno-missing-prototypes main.cpp && ./a.out"
