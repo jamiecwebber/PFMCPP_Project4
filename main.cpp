@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <cmath>
 /*
 Project 4: Part 5 / 9
  video: Chapter 5 Part 2
@@ -27,29 +28,29 @@ Do not delete your previous main.
  5) delete the example below after it makes sense how your code will change due to 1).
  */
 
-namespace Example
-{
-    int main()
-    {
-        FloatType floatNum(4.3f);
-        IntType intNum(2);
-        IntType intNum2(6);
+// namespace Examplei
+// {
+//     int main()
+//     {
+//         FloatType floatNum(4.3f);
+//         IntType intNum(2);
+//         IntType intNum2(6);
 
-        /* 
-        if you previously had a line like this demonstrating chaining:
+//         /* 
+//         if you previously had a line like this demonstrating chaining:
             
-            intNum.add(3).add(4.5f).divide(floatNum); 
+//             intNum.add(3).add(4.5f).divide(floatNum); 
 
-        it should become:
-        */
-        intNum += 3;
-        intNum += 4.5f;
-        intNum /= floatNum;
-        std::cout << "intNum: " << intNum << std::endl;
+//         it should become:
+//         */
+//         intNum += 3;
+//         intNum += 4.5f;
+//         intNum /= floatNum;
+//         std::cout << "intNum: " << intNum << std::endl;
         
-        return 0;
-    }
-}
+//         return 0;
+//     }
+// }
 
  /*
  6) compile/link/run to make sure you don't have any errors or warnings.
@@ -223,7 +224,7 @@ struct FloatType
     }
     operator float() { return *value; }
 
-    FloatType& add( float input );
+    FloatType& operator+=( float input );
     FloatType& subtract( float input );
     FloatType& multiply( float input );
     FloatType& divide( float input );
@@ -284,7 +285,7 @@ private:
 
 
 
-FloatType& FloatType::add( float input )
+FloatType& FloatType::operator+=( float input )
 {
     if (value != nullptr) 
         *value += input;
@@ -601,7 +602,8 @@ int main()
     DoubleType dt ( 2 );
     IntType it ( 2 ) ;
 
-    std::cout << "FloatType add result=" << ft.add( 2.0f ) << std::endl;
+    ft += 2.0f;
+    std::cout << "FloatType add result=" << ft << std::endl;
     std::cout << "FloatType subtract result=" << ft.subtract( 2.0f ) << std::endl;
     std::cout << "FloatType multiply result=" << ft.multiply( 2.0f ) << std::endl;
     std::cout << "FloatType divide result=" << ft.divide( 16.0f) << std::endl << std::endl;
@@ -619,7 +621,8 @@ int main()
 
         // FloatType object instanciation and method tests
     // --------
-    std::cout << "New value of ft = (ft + 3.0f) * 1.5f / 5.0f = " << ft.add( 3.0f ).multiply(1.5f).divide(5.0f) << std::endl;
+    ft += ( 3.0f );
+    std::cout << "New value of ft = (ft + 3.0f) * 1.5f / 5.0f = " << ft.multiply(1.5f).divide(5.0f) << std::endl;
        
     std::cout << "---------------------\n" << std::endl; 
     
