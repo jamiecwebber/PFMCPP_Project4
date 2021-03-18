@@ -272,6 +272,9 @@ struct DoubleType
     DoubleType& pow ( FloatType& input );
     DoubleType& pow ( IntType& input );
 
+    DoubleType& apply(std::function<DoubleType&(double&)> doubleFunc);
+    void apply(void(*doubleFunc)(double&));
+
 private:
     double* value = nullptr;
     DoubleType& powInternal ( double input );
@@ -293,6 +296,9 @@ struct IntType
     IntType& pow (IntType& input);
     IntType& pow (FloatType& input);
     IntType& pow (DoubleType& input);
+
+    IntType& apply(std::function<IntType&(int&)> intFunc);
+    void apply(void(*intFunc)(int&));
 
 private:
     int* value;
@@ -446,6 +452,27 @@ DoubleType& DoubleType::powInternal ( double input )
     return *this;
 }
 
+DoubleType& DoubleType::apply(std::function<DoubleType&(double&)> doubleFunc)
+{
+    if (doubleFunc)
+    {
+        return doubleFunc(*value);
+    }
+    return *this;
+}
+
+void DoubleType::apply(void(*doubleFunc)(double&))
+{
+    if (doubleFunc)
+    {
+        doubleFunc(*value);
+    }
+}
+
+void myDoubleFreeFunct(double& val)
+{
+    val += 6.0;
+}
 
 
 
@@ -511,6 +538,28 @@ IntType& IntType::powInternal ( int input )
         *value = static_cast<int>(std::pow(*value, input));
     
     return *this;
+}
+
+IntType& IntType::apply(std::function<IntType&(int&)> intFunc)
+{
+    if (intFunc)
+    {
+        return intFunc(*value);
+    }
+    return *this;
+}
+
+void IntType::apply(void(*intFunc)(int&))
+{
+    if (intFunc)
+    {
+        intFunc(*value);
+    }
+}
+
+void myIntFreeFunct(int& val)
+{
+    val += 5;
 }
 
 /*
@@ -664,25 +713,33 @@ void part6()
     std::cout << "ft3 after: " << ft3 << std::endl;
     std::cout << "---------------------\n" << std::endl;
 
-    // std::cout << "Calling DoubleType::apply() using a lambda (adds 6.0) and DoubleType as return type:" << std::endl;
-    // std::cout << "dt3 before: " << dt3 << std::endl;
-    // dt3.apply( [](){} );
-    // std::cout << "dt3 after: " << dt3 << std::endl;
-    // std::cout << "Calling DoubleType::apply() using a free function (adds 6.0) and void as return type:" << std::endl;
-    // std::cout << "dt3 before: " << dt3 << std::endl;
-    // dt3.apply(myDoubleFreeFunct);
-    // std::cout << "dt3 after: " << dt3 << std::endl;
-    // std::cout << "---------------------\n" << std::endl;
+    std::cout << "Calling DoubleType::apply() using a lambda (adds 6.0) and DoubleType as return type:" << std::endl;
+    std::cout << "dt3 before: " << dt3 << std::endl;
+    dt3.apply( [&dt3](double& storedValue) -> DoubleType&
+        { 
+            storedValue += 6.0;
+            return dt3;
+        } );
+    std::cout << "dt3 after: " << dt3 << std::endl;
+    std::cout << "Calling DoubleType::apply() using a free function (adds 6.0) and void as return type:" << std::endl;
+    std::cout << "dt3 before: " << dt3 << std::endl;
+    dt3.apply(myDoubleFreeFunct);
+    std::cout << "dt3 after: " << dt3 << std::endl;
+    std::cout << "---------------------\n" << std::endl;
 
-    // std::cout << "Calling IntType::apply() using a lambda (adds 5) and IntType as return type:" << std::endl;
-    // std::cout << "it3 before: " << it3 << std::endl;
-    // it3.apply( [](){} );
-    // std::cout << "it3 after: " << it3 << std::endl;
-    // std::cout << "Calling IntType::apply() using a free function (adds 5) and void as return type:" << std::endl;
-    // std::cout << "it3 before: " << it3 << std::endl;
-    // it3.apply(myIntFreeFunct);
-    // std::cout << "it3 after: " << it3 << std::endl;
-    // std::cout << "---------------------\n" << std::endl;    
+    std::cout << "Calling IntType::apply() using a lambda (adds 5) and IntType as return type:" << std::endl;
+    std::cout << "it3 before: " << it3 << std::endl;
+    it3.apply( [&it3](int& storedValue) -> IntType&
+        { 
+            storedValue += 5;
+            return it3;
+        } );
+    std::cout << "it3 after: " << it3 << std::endl;
+    std::cout << "Calling IntType::apply() using a free function (adds 5) and void as return type:" << std::endl;
+    std::cout << "it3 before: " << it3 << std::endl;
+    it3.apply(myIntFreeFunct);
+    std::cout << "it3 after: " << it3 << std::endl;
+    std::cout << "---------------------\n" << std::endl;    
 }
 
 int main()
