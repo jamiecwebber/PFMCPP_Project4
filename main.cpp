@@ -245,7 +245,7 @@ struct FloatType
     FloatType& pow( IntType& input );
 
     FloatType& apply(std::function<FloatType&(float&)> floatFunc);
-    // void apply(void(*)(float*));
+    void apply(void(*)(float&));
 
 private:
     float* value = nullptr;
@@ -369,6 +369,19 @@ FloatType& FloatType::apply(std::function<FloatType&(float&)> floatFunc)
         return floatFunc(*value);
     }
     return *this;
+}
+
+void FloatType::apply(void(*floatFunc)(float&))
+{
+    if (floatFunc)
+    {
+        floatFunc(*value);
+    }
+}
+
+void myFloatFreeFunct(float& val)
+{
+    val += 7.0f;
 }
 
 
@@ -645,11 +658,11 @@ void part6()
             return ft3;
         } );
     std::cout << "ft3 after: " << ft3 << std::endl;
-    // std::cout << "Calling FloatType::apply() using a free function (adds 7.0f) and void as return type:" << std::endl;
-    // std::cout << "ft3 before: " << ft3 << std::endl;
-    // ft3.apply(myFloatFreeFunct);
-    // std::cout << "ft3 after: " << ft3 << std::endl;
-    // std::cout << "---------------------\n" << std::endl;
+    std::cout << "Calling FloatType::apply() using a free function (adds 7.0f) and void as return type:" << std::endl;
+    std::cout << "ft3 before: " << ft3 << std::endl;
+    ft3.apply(myFloatFreeFunct);
+    std::cout << "ft3 after: " << ft3 << std::endl;
+    std::cout << "---------------------\n" << std::endl;
 
     // std::cout << "Calling DoubleType::apply() using a lambda (adds 6.0) and DoubleType as return type:" << std::endl;
     // std::cout << "dt3 before: " << dt3 << std::endl;
